@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
+    "build": "npx tsc -p .",
     "dev": "set NODE_ENV=development&& nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
   },
   "dependencies": {

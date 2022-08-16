@@ -5,8 +5,9 @@ import logger from "morgan";
 import router from "./routes";
 import dotenv from "dotenv";
 const env = process.env.NODE_ENV ?? "production";
-console.log(process.env.NODE_ENV, "mode");
+console.log(env, "mode");
 dotenv.config({ path: `./.env.${env}` });
+console.log("port", process.env.PORT);
 
 const app = express();
 
