@@ -1,14 +1,14 @@
 import { Router } from "express";
 const router = Router();
 
-import UserController from "./UserController.js";
+import UserController from "./UserController";
 /* GET users listing. */
 UserController.forEach((element) => {
-  const { route, method, controller } = element;
+  const { route, method, handler } = element;
   if (element?.middleware) {
-    router[method](route, element.middleware, controller);
+    router[method](route, element.middleware, handler);
   } else {
-    router[method](route, controller);
+    router[method](route, handler);
   }
 });
 

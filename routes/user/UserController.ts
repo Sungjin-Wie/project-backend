@@ -1,14 +1,11 @@
-import UserService from "./UserService.js";
-import { method } from "../../common/types.js";
-import {
-  authenticateMiddleware,
-  testMiddleware,
-} from "../../middlewares/auth.js";
+import UserService from "./UserService";
+import { Controller } from "../../common/interface";
+import { authenticateMiddleware, testMiddleware } from "../../middlewares/auth";
 
-const fetchMyInfo = {
+const fetchMyInfo: Controller = {
   route: "/info",
-  method: method.get,
-  controller: async (req, res, next) => {
+  method: "get",
+  handler: async (req, res, next) => {
     try {
       // controller logic here
       await UserService.findUserInfo();
@@ -20,13 +17,12 @@ const fetchMyInfo = {
   middleware: [authenticateMiddleware, testMiddleware],
 };
 
-const test = {
+const test: Controller = {
   route: "/test",
-  method: method.get,
-  controller: async (req, res, next) => {
+  method: "get",
+  handler: async (req, res, next) => {
     try {
       // controller logic here
-      await UserService.findUserInfo();
       res.send({ name: "test api" });
     } catch (e) {
       next(e);

@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import UserRouter from "./user/UserRouter.js";
+import UserRouter from "./user/UserRouter";
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

@@ -1,4 +1,4 @@
-export async function findUserInfo() {
+async function findUserInfo() {
   //service logic here
 }
 
