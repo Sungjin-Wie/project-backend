@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+import { Router } from "express";
+const router = Router();
+
+import userController from "./user/userController.js";
+import crawlingController from "./crawling/crawlingController.js";
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
-module.exports = router;
+router.use("/user", userController);
+router.use("/crawling", crawlingController);
+
+export default router;
