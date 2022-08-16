@@ -1,15 +1,13 @@
 import { Router } from "express";
 const router = Router();
 
-import userController from "./user/userController.js";
-import crawlingController from "./crawling/crawlingController.js";
+import UserRouter from "./user/UserRouter.js";
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.use("/user", userController);
-router.use("/crawling", crawlingController);
+router.use("/user", UserRouter);
 
 export default router;
