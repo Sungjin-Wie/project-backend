@@ -2,7 +2,7 @@ import express, { json, urlencoded } from "express";
 import { join } from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import router from "./routes";
+import router from "./src/routes";
 import dotenv from "dotenv";
 const env = process.env.NODE_ENV ?? "production";
 console.log(env, "mode");

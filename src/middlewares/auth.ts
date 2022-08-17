@@ -1,9 +1,14 @@
 import { Middleware } from "../common/interface";
 
-export const authenticateMiddleware: Middleware = async (req, res, next) => {
+export const checkAuth: Middleware = async (req, res, next) => {
   //auth logic here
   console.log("auth middleware");
-  next();
+  let unAuthorized = true;
+  if (unAuthorized) {
+    res.sendStatus(401);
+  } else {
+    next();
+  }
 };
 
 export const testMiddleware: Middleware = async (req, res, next) => {
