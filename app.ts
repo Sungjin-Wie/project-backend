@@ -2,7 +2,7 @@ import express, { json, urlencoded } from "express";
 import { join } from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import router from "./src/routes";
+import router from "./api";
 import dotenv from "dotenv";
 import { init } from "./src/config/redis";
 const env = process.env.NODE_ENV ?? "production";

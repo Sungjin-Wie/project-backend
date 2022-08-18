@@ -1,8 +1,8 @@
 import * as UserService from "./UserService";
-import { Controller } from "../../common/interface";
-import { checkAuth, testMiddleware } from "../../middlewares/auth";
-import { putCache, checkCache } from "../../utils/cacheUtils";
-import * as CommonUtils from "../../utils/commonUtils";
+import { Controller } from "../../src/common/interface";
+import { checkAuth, testMiddleware } from "../../src/middlewares/auth";
+import { putCache, checkCache } from "../../src/utils/cacheUtils";
+import * as CommonUtils from "../../src/utils/commonUtils";
 
 const fetchMyInfo: Controller = {
   route: "/info",
