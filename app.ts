@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import { init } from "./src/config/redis";
 import crawling from "./src/crawling";
 import scheduler from "node-schedule";
-scheduler.scheduleJob("*/5 * * * * *", crawling);
+scheduler.scheduleJob("*/3 * * * * *", crawling);
 const env = process.env.NODE_ENV ?? "production";
 dotenv.config({ path: `./.env.${env}` });
 console.log(env, "mode");

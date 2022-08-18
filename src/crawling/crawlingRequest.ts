@@ -6,21 +6,17 @@ import { checkIfItsRecentlyAdded } from "./common";
 
 async function crawlingRequest(target: any) {
   let key = url[target];
-  let cachedData = await RedisUtil.getObject(key);
-  if (!cachedData) {
-    await RedisUtil.setObject(key, []);
-  }
+  let cachedDataArray = (await RedisUtil.getObject(key)) ?? [];
   let { data } = await axiosInstance.get(key);
   let newestInfo = crawling(target, data);
-  if (cachedData?.length >= 10) {
-    cachedData.splice(0, cachedData.length - 9);
-    console.log(cachedData.length);
-  }
-  const [mutatedData, isMutated] = checkIfItsRecentlyAdded(
-    cachedData,
+  const [mutatedDataArray, isMutated] = checkIfItsRecentlyAdded(
+    cachedDataArray,
     newestInfo,
   );
-  if (isMutated) await RedisUtil.setObject(key, mutatedData);
+  if (isMutated) {
+    await RedisUtil.setObject(key, mutatedDataArray);
+    console.log(`new data crawled: ${newestInfo?.name}`);
+  }
 }
 
 export default crawlingRequest;
