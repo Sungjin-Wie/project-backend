@@ -1,8 +1,8 @@
 import * as UserService from "./UserService";
 import { Controller } from "../../common/interface";
 import { checkAuth, testMiddleware } from "../../middlewares/auth";
-import { cachePut, checkCache } from "../../utils/cacheUtils";
-import { delay } from "../../utils/commonUtils";
+import { putCache, checkCache } from "../../utils/cacheUtils";
+import * as CommonUtils from "../../utils/commonUtils";
 
 const fetchMyInfo: Controller = {
   route: "/info",
@@ -26,18 +26,17 @@ const expensiveRoute: Controller = {
   preMiddleware: [checkCache],
   handler: async (req, res, next) => {
     try {
-      await delay(10000); // wait for 10 seconds
-      let responseData = "You need 10 seconds to see this response.";
+      await CommonUtils.delay(10000); // wait for 10 seconds
+      let responseData = "Very expensive response";
       req.cacheData = responseData;
       req.cacheKey = req.url;
       res.send(responseData);
-
       next();
     } catch (e) {
       next(e);
     }
   },
-  postMiddleware: [cachePut],
+  postMiddleware: [putCache],
 };
 
 const template: Controller = {
@@ -48,7 +47,7 @@ const template: Controller = {
     try {
       // controller logic here
       res.send({ name: "template api" });
-      next();
+      // next(); //if you need to use postMiddleware
     } catch (e) {
       next(e);
     }

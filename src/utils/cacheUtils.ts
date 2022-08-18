@@ -2,7 +2,7 @@ import { Middleware } from "../common/interface";
 
 let cache: any = {};
 
-export const cachePut: Middleware = async (req, res, next) => {
+export const putCache: Middleware = async (req, res, next) => {
   if (req?.cacheData && req?.cacheKey) {
     // add data to cache
     console.log(req.cacheData);
@@ -14,10 +14,11 @@ export const cachePut: Middleware = async (req, res, next) => {
 
 export const checkCache: Middleware = async (req, res, next) => {
   let responseData = cache?.[req.url];
-  console.log(`responseData: ${responseData}`);
   if (responseData) {
+    console.log(`cache exists in key ${req.url}`);
     res.send(responseData);
   } else {
+    console.log(`cache miss in key ${req.url}`);
     next();
   }
 };

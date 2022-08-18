@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Controller, Middleware } from "../common/interface";
+import { Controller } from "../common/interface";
 
 export const createRouter = (controller: Controller[]) => {
   const router = Router();
