@@ -8,11 +8,14 @@
     "dev": "set NODE_ENV=development&& nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
+    "node-schedule": "^2.1.0",
     "redis": "^4.2.0"
   },
   "devDependencies": {
@@ -21,6 +24,7 @@
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.7.5",
+    "@types/node-schedule": "^2.1.0",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
