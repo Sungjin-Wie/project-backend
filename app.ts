@@ -4,11 +4,12 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import router from "./src/routes";
 import dotenv from "dotenv";
+import { init } from "./src/config/redis";
 const env = process.env.NODE_ENV ?? "production";
 console.log(env, "mode");
 dotenv.config({ path: `./.env.${env}` });
 console.log("port", process.env.PORT);
-
+init();
 const app = express();
 
 app.use(logger("dev"));
