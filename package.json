@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "NODE_ENV=production pm2 start dist/index.js --name project-backend",
     "build": "npx tsc -p .",
+    "stop": "pm2 stop project-backend",
     "dev": "set NODE_ENV=development&& nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
   },
   "dependencies": {

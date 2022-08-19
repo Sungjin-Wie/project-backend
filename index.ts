@@ -7,11 +7,18 @@
 import app from "./app";
 import debug from "debug";
 debug("project-backend:server");
-import { createServer } from "http";
+import { createServer as httpsCreateServer } from "https";
+import { createServer as httpCreateServer } from "http";
+import fs from "fs";
 
 /**
  * Get port from environment and store in Express.
  */
+var options = {
+  key: fs.readFileSync(__dirname + "/private.key"),
+  cert: fs.readFileSync(__dirname + "/cert.crt"),
+  ca: fs.readFileSync(__dirname + "/ca.crt"),
+};
 
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
@@ -20,7 +27,12 @@ app.set("port", port);
  * Create HTTP server.
  */
 
-var server = createServer(app);
+var server: any;
+if (process.env.NODE_ENV === "production") {
+  server = httpsCreateServer(options, app);
+} else {
+  server = httpCreateServer(app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -3,3 +3,6 @@ node_modules
 .env.production
 .env.development
 dist
+*.crt
+*.key
+dump.rdb
