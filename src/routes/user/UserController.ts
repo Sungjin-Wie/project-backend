@@ -1,13 +1,13 @@
 import * as UserService from "./UserService";
 import { Controller } from "../../common/interface";
-import { checkAuth, testMiddleware } from "../../middlewares/auth";
+import { checkAuthMiddleware, testMiddleware } from "../../middlewares/auth";
 import { putCache, checkCache } from "../../utils/cacheUtils";
 import * as CommonUtils from "../../utils/commonUtils";
 
 const fetchMyInfo: Controller = {
   route: "/info",
   method: "get",
-  preMiddleware: [checkAuth, testMiddleware],
+  preMiddleware: [checkAuthMiddleware, testMiddleware],
   handler: async (req, res, next) => {
     try {
       // controller logic here

@@ -19,9 +19,10 @@ const whiteList = [process.env.FRONT_URL];
 console.log(`whiteList: ${whiteList}`);
 const corsOptions = {
   origin: (origin: any, callback: any) => {
+    console.log(origin);
     let allowed = false;
     whiteList.forEach((url) => {
-      if (origin.includes(url)) allowed = true;
+      if (!origin || origin.includes(url)) allowed = true;
     });
     if (allowed) {
       callback(null, true);
