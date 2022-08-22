@@ -1,13 +1,13 @@
 import express, { json, urlencoded } from "express";
 import { join } from "path";
 import cookieParser from "cookie-parser";
-import logger from "morgan";
 import router from "./src/routes";
 import dotenv from "dotenv";
 import { init } from "./src/config/redis";
 import crawling from "./src/crawling";
 import scheduler from "node-schedule";
 import cors from "cors";
+import { measureRequestMiddleware } from "./src/middlewares";
 scheduler.scheduleJob("*/5 * * * * *", crawling);
 const env = process.env.NODE_ENV ?? "production";
 dotenv.config({ path: `./.env.${env}` });
@@ -19,18 +19,20 @@ const whiteList = [process.env.FRONT_URL];
 console.log(`whiteList: ${whiteList}`);
 const corsOptions = {
   origin: (origin: any, callback: any) => {
-    if (whiteList.indexOf(origin) !== -1) {
+    let allowed = false;
+    whiteList.forEach((url) => {
+      if (origin.includes(url)) allowed = true;
+    });
+    if (allowed) {
       callback(null, true);
     } else {
       callback(new Error("not allowed"));
     }
   },
 };
-if (process.env.NODE_ENV === "production") {
-  app.use(cors(corsOptions));
-}
 
-app.use(logger("dev"));
+app.use(cors(corsOptions));
+app.use(measureRequestMiddleware);
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());

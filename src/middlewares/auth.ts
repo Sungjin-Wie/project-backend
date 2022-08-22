@@ -1,6 +1,6 @@
 import { Middleware } from "../common/interface";
 
-export const checkAuth: Middleware = async (req, res, next) => {
+export const checkAuthMiddleware: Middleware = async (req, res, next) => {
   //auth logic here
   console.log("auth middleware");
   let unAuthorized = true;
