@@ -8,7 +8,7 @@ const getDurationInMilliseconds = (start: [number, number]) => {
   return (diff[0] * NS_PER_SEC + diff[1]) / NS_TO_MS;
 };
 
-const measureRequestMiddleware: Middleware = (req, res, next) => {
+export const measureRequestMiddleware: Middleware = (req, res, next) => {
   console.log(`${req.method} ${req.originalUrl} [STARTED]`);
   const start = process.hrtime();
 
@@ -32,5 +32,3 @@ const measureRequestMiddleware: Middleware = (req, res, next) => {
 
   next();
 };
-
-export default measureRequestMiddleware;
