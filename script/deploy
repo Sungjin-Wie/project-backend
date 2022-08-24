@@ -6,12 +6,12 @@ ssh jenkins@192.168.0.70 <<EOF
     . ~/.nvm/nvm.sh 
     nvm install 16.13.0
     npm install -g yarn
-    yarn add global typescript ts-node pm2 nodemon
+    yarn global add typescript ts-node pm2 nodemon
     rm -rf dist
     yarn build
     cp ~/ca.crt dist
     cp ~/cert.crt dist
     cp ~/private.key dist
-    yarn start
+    pm2 restart ecosystem.config.js
     exit
 EOF
