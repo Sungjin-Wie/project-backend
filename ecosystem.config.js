@@ -2,7 +2,8 @@ module.exports = {
   apps: [
     {
       name: "project-backend",
-      script: "dist/index.js",
+      script: "yarn",
+      args: "start",
       interpreter: "/bin/bash",
       env: {
         NODE_ENV: "development",
