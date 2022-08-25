@@ -1,58 +1,38 @@
 import * as UserService from "./UserService";
-import { Controller } from "../../common/interface";
-import { checkAuthMiddleware, testMiddleware } from "../../middlewares/auth";
-import { putCache, checkCache } from "../../utils/cacheUtils";
+import { Middleware } from "../../common/interface";
 import * as CommonUtils from "../../utils/commonUtils";
 
-const fetchMyInfo: Controller = {
-  route: "/info",
-  method: "get",
-  preMiddleware: [checkAuthMiddleware, testMiddleware],
-  handler: async (req, res, next) => {
-    try {
-      // controller logic here
-      let user = await UserService.findUserInfo();
-      res.send(user);
-    } catch (e) {
-      next(e);
-    }
-  },
-  postMiddleware: [],
+const fetchMyInfo: Middleware = async (req, res, next) => {
+  try {
+    // controller logic here
+    let user = await UserService.findUserInfo();
+    res.send(user);
+  } catch (e) {
+    next(e);
+  }
 };
 
-const expensiveRoute: Controller = {
-  route: "/expensive-route",
-  method: "get",
-  preMiddleware: [checkCache],
-  handler: async (req, res, next) => {
-    try {
-      await CommonUtils.delay(10000); // wait for 10 seconds
-      let responseData = "Very expensive response";
-      req.cacheData = responseData;
-      req.cacheKey = req.url;
-      res.send(responseData);
-      next();
-    } catch (e) {
-      next(e);
-    }
-  },
-  postMiddleware: [putCache],
+const expensiveRoute: Middleware = async (req, res, next) => {
+  try {
+    await CommonUtils.delay(10000); // wait for 10 seconds
+    let responseData = "Very expensive response";
+    req.cacheData = responseData;
+    req.cacheKey = req.url;
+    res.send(responseData);
+    next();
+  } catch (e) {
+    next(e);
+  }
 };
 
-const template: Controller = {
-  route: "/test",
-  method: "get",
-  preMiddleware: [],
-  handler: async (req, res, next) => {
-    try {
-      // controller logic here
-      res.send({ name: "template api" });
-      // next(); //if you need to use postMiddleware
-    } catch (e) {
-      next(e);
-    }
-  },
-  postMiddleware: [],
+const template: Middleware = async (req, res, next) => {
+  try {
+    // controller logic here
+    res.send({ name: "template api" });
+    // next(); //if you need to use postMiddleware
+  } catch (e) {
+    next(e);
+  }
 };
 
-export default [fetchMyInfo, expensiveRoute, template];
+export default { fetchMyInfo, expensiveRoute, template };

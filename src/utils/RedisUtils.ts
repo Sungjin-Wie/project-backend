@@ -1,4 +1,4 @@
-import { redisClient } from "../config/redis";
+import { redisClient } from "../config/redisConfig";
 
 const RedisUtil = {
   set: async (key: string, value: string, seconds?: number) => {

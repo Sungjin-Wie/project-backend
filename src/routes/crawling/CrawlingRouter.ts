@@ -1,6 +1,15 @@
-import { createRouter } from "../../utils/routeUtils";
+import { Router } from "express";
 import CrawlingController from "./CrawlingController";
+import { checkCache, putCache } from "../../utils/cacheUtils";
+const router = Router();
 
-const CrawlingRouter = createRouter(CrawlingController);
+router.get("/", CrawlingController.fetchCrawlingData);
+router.get(
+  "/expensive-route",
+  checkCache,
+  CrawlingController.expensiveRoute,
+  putCache,
+);
+router.get("/test", CrawlingController.template);
 
-export default CrawlingRouter;
+export default router;

@@ -1,4 +1,4 @@
-import axiosInstance from "../config/axios";
+import axiosInstance from "../config/axiosConfig";
 import RedisUtil from "../utils/RedisUtils";
 import url from "./url";
 import crawling from "./crawling";

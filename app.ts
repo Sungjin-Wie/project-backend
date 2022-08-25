@@ -3,7 +3,7 @@ import { join } from "path";
 import cookieParser from "cookie-parser";
 import router from "./src/routes";
 import dotenv from "dotenv";
-import { init } from "./src/config/redis";
+import { init } from "./src/config/redisConfig";
 import crawling from "./src/crawling";
 import scheduler from "node-schedule";
 import cors from "cors";
