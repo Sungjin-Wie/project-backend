@@ -14,11 +14,6 @@ import fs from "fs";
 /**
  * Get port from environment and store in Express.
  */
-var options = {
-  key: fs.readFileSync(__dirname + "/private.key"),
-  cert: fs.readFileSync(__dirname + "/cert.crt"),
-  ca: fs.readFileSync(__dirname + "/ca.crt"),
-};
 
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
@@ -29,6 +24,11 @@ app.set("port", port);
 
 var server: any;
 if (process.env.NODE_ENV === "production") {
+  var options = {
+    key: fs.readFileSync(__dirname + "/private.key"),
+    cert: fs.readFileSync(__dirname + "/cert.crt"),
+    ca: fs.readFileSync(__dirname + "/ca.crt"),
+  };
   server = httpsCreateServer(options, app);
 } else {
   server = httpCreateServer(app);
