@@ -6,7 +6,7 @@
     "start": "node dist/index.js",
     "build": "npx tsc -p .",
     "stop": "pm2 stop project-backend",
-    "dev": "set NODE_ENV=t && nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
+    "dev": "set NODE_ENV=development&& nodemon --watch \"*.ts\" --exec \"ts-node\" index.ts"
   },
   "dependencies": {
     "axios": "^0.27.2",
