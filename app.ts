@@ -13,6 +13,7 @@ const env = process.env.NODE_ENV ?? "production";
 dotenv.config({ path: `./.env.${env}` });
 console.log(env, "mode");
 console.log("starting server at port", process.env.PORT);
+console.log(process.env.REDIS_URL, process.env.REDIS_PASSWORD);
 init();
 console.log("starting redis in", process.env.REDIS_URL);
 const app = express();
