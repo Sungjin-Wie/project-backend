@@ -11,7 +11,7 @@ export const redisClient = redis.createClient({
 // });
 export const init = async () => {
   try {
-    // await redisClient.connect();
+    await redisClient.connect();
   } catch (e) {
     throw e;
   }
